@@ -8,6 +8,7 @@ Part 1 counts the safe reports.
 Part 2 adds a "Problem Dampener": a report also counts as safe if it can be
 made safe by removing a single level.
 """
+import sys
 
 from __future__ import annotations
 
@@ -51,10 +52,17 @@ def part2(reports: list[list[int]]) -> int:
 
 def main() -> None:
     input_path = Path(__file__).resolve().parent.parent / "input.txt"
+    
+    # Check if the file exists before trying to read it
+    if not input_path.exists():
+        print("❌ Error: input.txt not found!")
+        print("Please download your unique puzzle input from Advent of Code")
+        print("and save it as 'input.txt' in the main project folder.")
+        sys.exit(1) # Exit the script with an error code
+
     reports = parse(input_path.read_text())
     print(f"Part 1: {part1(reports)}")
     print(f"Part 2: {part2(reports)}")
-
 
 if __name__ == "__main__":
     main()
